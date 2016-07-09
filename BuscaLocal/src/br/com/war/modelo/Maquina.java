@@ -53,7 +53,7 @@ public class Maquina {
     
     /**
      * Remove a primeira tarefa da pilha de tarefas da máquina 
-     * @return 
+     * @return tarefa que foi removida
      */
     public Tarefa removePrimeiraTarefa() {
         Tarefa retorno = tarefas.pop();
