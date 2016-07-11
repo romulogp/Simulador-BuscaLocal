@@ -1,9 +1,9 @@
 package br.com.war.heuristicas;
 
-public class MonotonaRandomizada extends BuscaLocal {
+public class MonotonaRandomizada extends Monotona {
     
     @Override
-    public void executar() {
+    public void executar(boolean debug) {
         
     }
     
