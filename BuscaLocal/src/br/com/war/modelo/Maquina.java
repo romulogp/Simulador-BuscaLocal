@@ -1,5 +1,6 @@
 package br.com.war.modelo;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class Maquina {
@@ -44,7 +45,6 @@ public class Maquina {
     }
     
     /**
-     * 
      * @return a tarefa no topo da pilha
      */
     public Tarefa getPrimeiraTarefa() {
@@ -53,15 +53,19 @@ public class Maquina {
     
     /**
      * Remove a primeira tarefa da pilha de tarefas da máquina 
-     * @return tarefa que foi removida
+     * @return a tarefa removida
      */
     public Tarefa removePrimeiraTarefa() {
-        Tarefa retorno = tarefas.pop();
-        if (retorno != null) {
+        Tarefa retorno;
+        try {
+            retorno = tarefas.pop();
             makespan -= retorno.getTempo();
+        } catch (EmptyStackException ee) {
+            return null;
         }
         return retorno;
     }
+    
     
     /**
      * Envia a tarefa do topo da pilha para a máquina destino
@@ -82,6 +86,10 @@ public class Maquina {
 
     public int getMakespan() {
         return makespan;
+    }
+    
+    public int getNumeroTarefas(){
+        return this.tarefas.size();
     }
     
 }
