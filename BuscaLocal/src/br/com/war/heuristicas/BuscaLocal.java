@@ -92,4 +92,8 @@ public abstract class BuscaLocal {
     public int getNumeroTarefas(){
         return this.numTarefas;
     }
+    
+    public int getNumeroMaquinas(){
+        return this.maquinas.size();
+    }
 }

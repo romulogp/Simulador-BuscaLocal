@@ -1,0 +1,78 @@
+heuristica	n	m	replicacao	tempo	iteracoes	valor	parametro
+monotona	32	10	1	281	75	186	NA
+monotona	32	10	2	269	77	182	NA
+monotona	32	10	3	250	73	158	NA
+monotona	32	10	4	326	77	204	NA
+monotona	32	10	5	272	86	195	NA
+monotona	32	10	6	218	76	182	NA
+monotona	32	10	7	268	72	210	NA
+monotona	32	10	8	219	76	173	NA
+monotona	32	10	9	238	78	145	NA
+monotona	32	10	10	278	70	208	NA
+Resultado:	32	10	10	261,9	76	145	NA
+						210	
+							
+monotona	100	10	1	460	238	581	NA
+monotona	100	10	2	335	246	585	NA
+monotona	100	10	3	261	274	536	NA
+monotona	100	10	4	494	241	558	NA
+monotona	100	10	5	300	247	522	NA
+monotona	100	10	6	250	254	531	NA
+monotona	100	10	7	280	269	503	NA
+monotona	100	10	8	426	267	547	NA
+monotona	100	10	9	389	270	523	NA
+monotona	100	10	10	301	258	535	NA
+Resultado:	100	10	10	349,6	256,4	503	NA
+						585	
+							
+monotona	89	20	1	352	332	248	NA
+monotona	89	20	2	306	343	244	NA
+monotona	89	20	3	268	342	247	NA
+monotona	89	20	4	262	349	232	NA
+monotona	89	20	5	409	392	219	NA
+monotona	89	20	6	449	344	244	NA
+monotona	89	20	7	285	327	253	NA
+monotona	89	20	8	330	351	244	NA
+monotona	89	20	9	172	341	239	NA
+monotona	89	20	10	333	357	253	NA
+Resultado:	89	20	10	316,6	347,8	219	NA
+						253	
+							
+monotona	400	20	1	467	1642	1049	NA
+monotona	400	20	2	527	1607	1047	NA
+monotona	400	20	3	597	1626	1055	NA
+monotona	400	20	4	487	1635	1030	NA
+monotona	400	20	5	388	1588	1013	NA
+monotona	400	20	6	387	1577	1056	NA
+monotona	400	20	7	342	1640	1057	NA
+monotona	400	20	8	393	1575	1035	NA
+monotona	400	20	9	698	1578	1049	NA
+monotona	400	20	10	428	1587	1010	NA
+Resultado:	400	20	10	471,4	1605,5	1010	NA
+						1057	
+							
+monotona	354	50	1	354	2307	367	NA
+monotona	354	50	2	645	2417	370	NA
+monotona	354	50	3	407	2420	372	NA
+monotona	354	50	4	459	2299	380	NA
+monotona	354	50	5	538	2373	383	NA
+monotona	354	50	6	389	2557	361	NA
+monotona	354	50	7	520	2362	383	NA
+monotona	354	50	8	434	2387	377	NA
+monotona	354	50	9	434	2395	387	NA
+monotona	354	50	10	370	2448	365	NA
+Resultado:	354	50	10	455	475,5	361	NA
+						387	
+							
+monotona	2500	50	1	1278	16783	2577	NA
+monotona	2500	50	2	1153	17111	2527	NA
+monotona	2500	50	3	1108	17077	2530	NA
+monotona	2500	50	4	1396	16894	2578	NA
+monotona	2500	50	5	1625	17298	2576	NA
+monotona	2500	50	6	1155	17216	2488	NA
+monotona	2500	50	7	1085	17282	2533	NA
+monotona	2500	50	8	1152	17158	2516	NA
+monotona	2500	50	9	1143	17295	2549	NA
+monotona	2500	50	10	1264	17188	2518	NA
+Resultado:	2500	50	10	1235,9	17130,2	2488	NA
+						2578	
