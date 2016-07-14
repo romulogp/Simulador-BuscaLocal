@@ -9,7 +9,8 @@ public abstract class BuscaLocal {
 
     private final ArrayList<Maquina> maquinas;
     private int numTarefas;
-
+    private int iteracoes = 0; // iterações são incrementadas apenas quando a melhora no makespan
+    
     protected void executar(boolean debug) {
     }
 
@@ -78,5 +79,17 @@ public abstract class BuscaLocal {
         }
 
         return maquinas.get(proximoIndex);
+    }
+    
+    public void incrementaIteracao(){
+        this.iteracoes++;
+    }
+    
+    public int getIteracoes(){
+        return this.iteracoes;
+    }
+    
+    public int getNumeroTarefas(){
+        return this.numTarefas;
     }
 }

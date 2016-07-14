@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Monotona extends BuscaLocal {
     private int contadorIteracoesDebug = 1;
     
+    
     @Override
     public void executar(boolean debug) {
         ArrayList<Maquina> maquinas = this.getMaquinas();
@@ -26,7 +27,7 @@ public class Monotona extends BuscaLocal {
             maquinaMaiorMakespan = this.getMaquinaMaiorMakespan();
             makespanAtual        = maquinaMaiorMakespan.getMakespan();            
             proximaMaquina       = this.getProximaMaquina(maquinaMaiorMakespan, numeroMovimentosSemMelhora);
-            Tarefa tarefaAtual    = maquinaMaiorMakespan.removePrimeiraTarefa(); 
+            Tarefa tarefaAtual   = maquinaMaiorMakespan.removePrimeiraTarefa(); 
             
             //ocorreu melhora, move a tarefa para a próxima maquina
             if(proximaMaquina.getMakespan() + tarefaAtual.getTempo() < makespanAtual){
@@ -34,7 +35,9 @@ public class Monotona extends BuscaLocal {
                 
                 //zera o numero de movimentos sem melhora
                 numeroMovimentosSemMelhora = 0;
-            
+                
+                // aumenta o numero de iterações realizadas
+                this.incrementaIteracao();
             //nao ocorreu melhora, mantem a tarefa na mesma maquina    
             }else{
                 maquinaMaiorMakespan.adicionaTarefa(tarefaAtual);
