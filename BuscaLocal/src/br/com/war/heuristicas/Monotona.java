@@ -38,16 +38,17 @@ public class Monotona extends BuscaLocal {
                 proximaMaquina.adicionaTarefa(tarefaAtual); 
                 
                 //zera o numero de movimentos sem melhora
-                numeroMovimentosSemMelhora = 0;
+                numeroMovimentosSemMelhora = 0;               
                 
-                // aumenta o numero de iterações realizadas
-                this.incrementaIteracao();
             //nao ocorreu melhora, mantem a tarefa na mesma maquina    
             }else{
                 maquinaMaiorMakespan.adicionaTarefa(tarefaAtual);
                 //incrementa o numero de movimentos sem melhora.
                 numeroMovimentosSemMelhora++;
             }
+            
+            // aumenta o numero de iterações realizadas
+            this.incrementaIteracao();
         }
         
         setTempoExecucao(System.currentTimeMillis() - tempoInicial);
