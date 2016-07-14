@@ -11,9 +11,9 @@ public class Main {
     public static void main(String[] args) {
         MainWindow.loadWindow();
         
-        Monotona monotona = new Monotona();
-        monotona.instanciarMaquinas(numMaquinas, parametroTarefas);        
-        monotona.executar(debug);
-        System.out.println("ACABOU");
+//        Monotona monotona = new Monotona();
+//        monotona.instanciarMaquinas(numMaquinas, parametroTarefas);        
+//        monotona.executar(debug);
+//        System.out.println("ACABOU");
     }
 }

@@ -1,17 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.war.gui;
 
+import br.com.war.heuristicas.Monotona;
+import br.com.war.heuristicas.MonotonaRandomizada;
+import br.com.war.simulacao.Simulador;
 import java.awt.EventQueue;
+import java.util.List;
+import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author Rômulo Göelzer Portolann
  */
 public class MainWindow extends javax.swing.JFrame {
 
@@ -21,6 +21,8 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         setLocationRelativeTo(null);
+
+        validaHeuristicaSelecionada();
     }
 
     /**
@@ -32,19 +34,37 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         topo_jPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         conteudo_jPanel = new javax.swing.JPanel();
         jSplitPane2 = new javax.swing.JSplitPane();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        heuristica_jTabbedPane = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
+        monotona_jRadioButton = new javax.swing.JRadioButton();
+        monotonaRandom_jRadioButton = new javax.swing.JRadioButton();
+        ambas_jRadioButton = new javax.swing.JRadioButton();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        maquinas_jTextField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        perturbacao_jLabel = new javax.swing.JLabel();
+        perturbacao_jTextField = new javax.swing.JTextField();
+        parametros_jTextField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        tarefas_jTextField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        execucoes_jTextField = new javax.swing.JTextField();
         saida_jTabbedPane = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        saida_jScrollPane = new javax.swing.JScrollPane();
+        log_jTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simulação de Heurísticas de Busca Local");
@@ -93,40 +113,207 @@ public class MainWindow extends javax.swing.JFrame {
         conteudo_jPanel.setLayout(new java.awt.BorderLayout());
 
         jSplitPane2.setBorder(null);
-        jSplitPane2.setDividerLocation(300);
+        jSplitPane2.setDividerLocation(230);
         jSplitPane2.setDividerSize(0);
         jSplitPane2.setEnabled(false);
         jSplitPane2.setFocusable(false);
 
-        jTabbedPane1.setFocusable(false);
+        heuristica_jTabbedPane.setFocusable(false);
+
+        buttonGroup1.add(monotona_jRadioButton);
+        monotona_jRadioButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        monotona_jRadioButton.setSelected(true);
+        monotona_jRadioButton.setText("Monótona");
+        monotona_jRadioButton.setFocusable(false);
+        monotona_jRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monotona_jRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(monotonaRandom_jRadioButton);
+        monotonaRandom_jRadioButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        monotonaRandom_jRadioButton.setText("Monótona Randômica");
+        monotonaRandom_jRadioButton.setFocusable(false);
+        monotonaRandom_jRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monotonaRandom_jRadioButtonActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(ambas_jRadioButton);
+        ambas_jRadioButton.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        ambas_jRadioButton.setText("Ambas");
+        ambas_jRadioButton.setFocusable(false);
+        ambas_jRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ambas_jRadioButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 297, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(monotona_jRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ambas_jRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(monotonaRandom_jRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(30, 30, 30))
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ambas_jRadioButton, monotona_jRadioButton});
+
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 243, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(monotona_jRadioButton)
+                .addGap(30, 30, 30)
+                .addComponent(monotonaRandom_jRadioButton)
+                .addGap(30, 30, 30)
+                .addComponent(ambas_jRadioButton)
+                .addGap(40, 40, 40))
         );
 
-        jTabbedPane1.addTab("Heurística", jPanel2);
+        heuristica_jTabbedPane.addTab("Heurística", jPanel2);
 
-        jSplitPane2.setLeftComponent(jTabbedPane1);
+        jSplitPane2.setLeftComponent(heuristica_jTabbedPane);
 
         jTabbedPane2.setFocusable(false);
+
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel4.setText("Nº Máquinas:");
+        jLabel4.setToolTipText("");
+
+        maquinas_jTextField.setText("10,20,30");
+        maquinas_jTextField.setToolTipText("");
+        maquinas_jTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel5.setText("Expoente 'r':");
+
+        perturbacao_jLabel.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        perturbacao_jLabel.setText("Perturbação: (%)");
+
+        perturbacao_jTextField.setText("10");
+
+        parametros_jTextField.setText("1.5, 2.0");
+        parametros_jTextField.setPreferredSize(new java.awt.Dimension(14, 25));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel7.setText("Tarefas:");
+
+        tarefas_jTextField.setEnabled(false);
+        tarefas_jTextField.setPreferredSize(new java.awt.Dimension(14, 25));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel8.setText("Obs.: Para testar várias instâncias: 10,20,30");
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jLabel11.setText("Default: 1.5, 2.0");
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/war/resources/icons/run-icon-24.png"))); // NOI18N
+        jButton1.setText("Simular");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setText("Nº execuções");
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel9.setText("por  instância");
+
+        execucoes_jTextField.setText("10");
+        execucoes_jTextField.setToolTipText("");
+        execucoes_jTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 493, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(maquinas_jTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(parametros_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(perturbacao_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, 0)
+                                .addGap(19, 19, 19)
+                                .addComponent(perturbacao_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tarefas_jTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(execucoes_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(jLabel11)))
+                .addGap(30, 30, 30))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel5, perturbacao_jLabel});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, perturbacao_jTextField});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 243, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(maquinas_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(jLabel8)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(parametros_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(perturbacao_jLabel)
+                    .addComponent(perturbacao_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(jLabel11)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tarefas_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(execucoes_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel9)))
+                .addGap(15, 15, 15))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {execucoes_jTextField, jButton1, jLabel4, jLabel5, jLabel7, maquinas_jTextField, parametros_jTextField, perturbacao_jLabel, perturbacao_jTextField, tarefas_jTextField});
+
+        execucoes_jTextField.getAccessibleContext().setAccessibleName("");
 
         jTabbedPane2.addTab("Configurar Instância", jPanel1);
 
@@ -136,12 +323,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         saida_jTabbedPane.setFocusable(false);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setFocusable(false);
-        jScrollPane1.setViewportView(jTextArea1);
+        log_jTextArea.setEditable(false);
+        log_jTextArea.setColumns(20);
+        log_jTextArea.setRows(5);
+        log_jTextArea.setFocusable(false);
+        saida_jScrollPane.setViewportView(log_jTextArea);
 
-        saida_jTabbedPane.addTab("Saída", jScrollPane1);
+        saida_jTabbedPane.addTab("Saída", saida_jScrollPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,15 +337,10 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(saida_jTabbedPane)
-                .addGap(5, 5, 5))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(topo_jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(conteudo_jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(saida_jTabbedPane)
+                    .addComponent(topo_jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(conteudo_jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
@@ -167,13 +350,108 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(topo_jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(conteudo_jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(saida_jTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private String transformarListaValoresEmTexto(List<Long> lista) {
+        String texto = "";
+        for (int i = 0; i < lista.size() - 1; i++) {
+            texto += lista.get(i).toString() + ',';
+        }
+        texto += lista.get(lista.size() - 1).toString();
+        return texto;
+    }
+
+    private List<Long> gerarNumeroTarefas(String maquinas, String parametros) {
+        maquinas = maquinas.trim();
+        parametros = parametros.trim();
+        List<Double> listaMaquinas = obterListaDeValores(maquinas, ',');
+        List<Double> listaParametros = obterListaDeValores(parametros, ',');
+        List<Long> listaTarefas = new ArrayList<>();
+        listaMaquinas.stream().forEach((m) -> {
+            listaParametros.stream().forEach((r) -> {
+                listaTarefas.add(Math.round(Math.pow(m, r)));
+            });
+        });
+        return listaTarefas;
+    }
+
+    private List<Double> obterListaDeValores(String string, char separator) {
+        List<Double> valuesList = new ArrayList<>();
+        string = string.trim();
+
+        String value = "";
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) != separator) {
+                value += string.charAt(i);
+            } else {
+                valuesList.add(Double.valueOf(value));
+                value = "";
+            }
+        }
+        valuesList.add(Double.valueOf(value));
+
+        return valuesList;
+    }
+
+    private void monotonaRandom_jRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monotonaRandom_jRadioButtonActionPerformed
+        validaHeuristicaSelecionada();
+    }//GEN-LAST:event_monotonaRandom_jRadioButtonActionPerformed
+
+    private void monotona_jRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monotona_jRadioButtonActionPerformed
+        validaHeuristicaSelecionada();
+    }//GEN-LAST:event_monotona_jRadioButtonActionPerformed
+
+    private void ambas_jRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambas_jRadioButtonActionPerformed
+        validaHeuristicaSelecionada();
+    }//GEN-LAST:event_ambas_jRadioButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String maquinasTxt = maquinas_jTextField.getText();
+        String parametrosTxt = parametros_jTextField.getText();
+        tarefas_jTextField.setText(transformarListaValoresEmTexto(gerarNumeroTarefas(maquinasTxt, parametrosTxt)));
+        
+        List<Double> maquinasPipeline = obterListaDeValores(maquinasTxt, ',');
+        List<Double> parametrosPipeline = obterListaDeValores(parametrosTxt, ',');
+        int numExecucoes = Integer.valueOf(execucoes_jTextField.getText());
+        
+        Simulador s = new Simulador(maquinasPipeline, parametrosPipeline, numExecucoes);
+        if (monotona_jRadioButton.isSelected()) {
+            s.simular(new Monotona());
+            log_jTextArea.setText(s.getLog());
+        } else if (monotonaRandom_jRadioButton.isSelected()) {
+            s.simular(new MonotonaRandomizada());
+            log_jTextArea.setText(s.getLog());
+        } else {
+            s.simular(new Monotona());
+            log_jTextArea.setText(s.getLog());
+            s.simular(new MonotonaRandomizada());
+            log_jTextArea.setText(s.getLog());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void validaHeuristicaSelecionada() {
+        if (monotonaRandom_jRadioButton.isSelected() || ambas_jRadioButton.isSelected()) {
+            enablePerturbacao();
+        } else {
+            disablePerturbacao();
+        }
+    }
+
+    private void enablePerturbacao() {
+        perturbacao_jLabel.setEnabled(true);
+        perturbacao_jTextField.setEnabled(true);
+    }
+
+    private void disablePerturbacao() {
+        perturbacao_jLabel.setEnabled(false);
+        perturbacao_jTextField.setEnabled(false);
+    }
 
     public static void loadWindow() {
         try {
@@ -187,7 +465,7 @@ public class MainWindow extends javax.swing.JFrame {
         } catch (UnsupportedLookAndFeelException ulaf) {
             System.out.println("Unsupported Look and Feel");
         }
-        
+
         /* Create and display the form */
         EventQueue.invokeLater(() -> {
             new MainWindow().setVisible(true);
@@ -195,18 +473,36 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton ambas_jRadioButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel conteudo_jPanel;
+    private javax.swing.JTextField execucoes_jTextField;
+    private javax.swing.JTabbedPane heuristica_jTabbedPane;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea log_jTextArea;
+    private javax.swing.JTextField maquinas_jTextField;
+    private javax.swing.JRadioButton monotonaRandom_jRadioButton;
+    private javax.swing.JRadioButton monotona_jRadioButton;
+    private javax.swing.JTextField parametros_jTextField;
+    private javax.swing.JLabel perturbacao_jLabel;
+    private javax.swing.JTextField perturbacao_jTextField;
+    private javax.swing.JScrollPane saida_jScrollPane;
     private javax.swing.JTabbedPane saida_jTabbedPane;
+    private javax.swing.JTextField tarefas_jTextField;
     private javax.swing.JPanel topo_jPanel;
     // End of variables declaration//GEN-END:variables
 }

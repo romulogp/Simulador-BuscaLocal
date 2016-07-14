@@ -7,17 +7,12 @@ import java.util.Stack;
 
 public abstract class BuscaLocal {
 
-    private final ArrayList<Maquina> maquinas;
+    private ArrayList<Maquina> maquinas;
     private int numTarefas;
 
-    protected void executar(boolean debug) {
-    }
-
-    ;
-    
-    public BuscaLocal() {
-        this.maquinas = new ArrayList<>();
-    }
+    public void executar(boolean debug) { 
+        
+    };
 
     /**
      * Criar as máquinas para busca
@@ -27,6 +22,7 @@ public abstract class BuscaLocal {
      * de tarefas necessárias
      */
     public void instanciarMaquinas(int numMaquinas, double parametroTarefa) {
+        maquinas = new ArrayList<>();
         this.maquinas.add(new Maquina(instanciarTarefasIniciais(numMaquinas, parametroTarefa))); // ADICIONA UM PILHA DE TAREFAS NA PRIMEIRA MAQUINA
         for (int i = 0; i < numMaquinas - 1; i++) {
             this.maquinas.add(new Maquina());
@@ -43,7 +39,6 @@ public abstract class BuscaLocal {
      */
     public Stack<Tarefa> instanciarTarefasIniciais(int numMaquinas, double parametroTarefa) {
         this.numTarefas = (int) Math.round(Math.pow(numMaquinas, parametroTarefa));
-        System.out.println(numTarefas + " tarefas serão instanciadas.");
         Stack<Tarefa> tarefas = new Stack();
         for (int i = 0; i < this.numTarefas; i++) {
             tarefas.push(new Tarefa(i + 1));

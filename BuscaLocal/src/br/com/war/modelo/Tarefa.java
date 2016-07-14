@@ -10,7 +10,7 @@ public class Tarefa {
     public Tarefa(int PID) {
         this.PID = PID;
         this.tempo = (int) (Math.random() * TEMPO_MAXIMO) + 1;
-        System.out.println("Tarefa criada. PID: "+ PID +"  Tempo: " + tempo + " ms");
+//        System.out.println("Tarefa criada. PID: "+ PID +"  Tempo: " + tempo + " ms");
     }
 
     public int getPID() {
