@@ -92,4 +92,26 @@ public class Maquina {
         return this.tarefas.size();
     }
     
+    public int getIndexTarefaAleatoria() {
+        int indexTarefaAleatoria = (int) (Math.random() * tarefas.size());
+
+        return indexTarefaAleatoria;   
+    }
+
+    public Tarefa removeTarefaAleatoriaFromIndex(int indexTarefaAleatoria) {
+        Tarefa retorno;
+        try {
+            retorno = tarefas.get(indexTarefaAleatoria);
+            tarefas.remove(indexTarefaAleatoria);
+            makespan -= retorno.getTempo();
+        } catch (EmptyStackException ee) {
+            return null;
+        }
+        return retorno;
+    }
+
+    public void adicionaTarefaToIndex(int indexTarefaAleatoria, Tarefa tarefaAleatoria) {
+        tarefas.add(indexTarefaAleatoria, tarefaAleatoria);   
+        makespan += tarefaAleatoria.getTempo();
+    }
 }

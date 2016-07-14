@@ -76,3 +76,28 @@ monotona	2500	50	9	1143	17295	2549	NA
 monotona	2500	50	10	1264	17188	2518	NA
 Resultado:	2500	50	10	1235,9	17130,2	2488	NA
 						2578	
+
+monótona randomizada,2500,50,10,299,0,124417,NA
+monótona randomizada,8,4,10,44,9,115,NA
+monótona randomizada,8,4,10,280,9,156,NA
+monótona randomizada,8,4,10,311,7,121,NA
+monótona randomizada,8,4,10,437,8,112,NA
+monótona randomizada,8,4,10,434,9,126,NA
+monótona randomizada,8,4,10,394,8,113,NA
+monótona randomizada,8,4,10,498,1046,76,NA
+monótona randomizada,8,4,10,514,1162,103,NA
+monótona randomizada,8,4,10,584,1120,98,NA
+monótona randomizada,8,4,10,507,1131,120,NA
+monótona randomizada,8,4,10,512,1129,89,NA
+monótona randomizada,8,4,10,395,1125,100,NA
+monótona randomizada,8,4,10,258,1134,83,NA
+monótona randomizada,8,4,10,258,1134,119,NA
+monótona randomizada,8,4,10,359,1130,94,NA
+monótona randomizada,8,4,10,2279,9804,136,NA
+monótona randomizada,8,4,10,3011,10218,126,NA
+monótona randomizada,8,4,10,2997,9811,122,NA
+monótona randomizada,8,4,10,2977,10501,140,NA
+monótona randomizada,8,4,10,790,1386,108,NA
+monótona randomizada,8,4,10,336,1007,168,NA
+monótona randomizada,8,4,10,413,1116,112,NA
+monótona randomizada,8,4,10,416,1019,138,NA

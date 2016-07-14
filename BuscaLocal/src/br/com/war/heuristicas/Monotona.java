@@ -5,8 +5,6 @@ import br.com.war.modelo.Tarefa;
 import java.util.ArrayList;
 
 public class Monotona extends BuscaLocal {
-    private int contadorIteracoesDebug = 1;
-    
     
     @Override
     public void executar(boolean debug) {
@@ -22,7 +20,7 @@ public class Monotona extends BuscaLocal {
         while (numeroMovimentosSemMelhora <= (maquinas.size() -1 )){
             
             if(debug){
-                this.debug(maquinas, numeroMovimentosSemMelhora);
+                this.debug(maquinas, numeroMovimentosSemMelhora, 0);
             }
             maquinaMaiorMakespan = this.getMaquinaMaiorMakespan();
             makespanAtual        = maquinaMaiorMakespan.getMakespan();            
@@ -45,31 +43,5 @@ public class Monotona extends BuscaLocal {
                 numeroMovimentosSemMelhora++;
             }
         }   
-    }
-
-    private void debug(ArrayList<Maquina> maquinas, int numeroMovimentosSemMelhora) {
-        int numeroMaquina = 1;
-        
-        System.out.println("\n"+this.contadorIteracoesDebug+ "° ITERACAO");
-        
-        for (Maquina maquina : maquinas) {
-            String debugMsg = "";
-            //numero da maquina
-            debugMsg += Integer.toString(numeroMaquina) + " - ";
-            //makespan da maquina
-            debugMsg += "MS(" + maquina.getMakespan() + ")";
-            
-            int numeroTarefa = 1;
-            for(Tarefa tarefa : maquina.getTarefas() ){
-                debugMsg += " - " + "T" + Integer.toString(numeroTarefa);
-                debugMsg += "(" + Integer.toString(tarefa.getTempo()) + ")";
-                numeroTarefa++;
-            }
-            
-            System.out.println(debugMsg);            
-            numeroMaquina++;            
-        }     
-        System.out.println("movimentos sem melhora: " + numeroMovimentosSemMelhora);
-        this.contadorIteracoesDebug++;
-    }    
+    } 
 }
