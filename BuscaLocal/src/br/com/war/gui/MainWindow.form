@@ -300,7 +300,6 @@
                                               <Component id="parametros_jTextField" min="-2" pref="90" max="-2" attributes="0"/>
                                               <EmptySpace max="32767" attributes="0"/>
                                               <Component id="perturbacao_jLabel" linkSize="3" max="32767" attributes="0"/>
-                                              <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                                               <Component id="perturbacao_jTextField" linkSize="4" min="-2" pref="101" max="-2" attributes="0"/>
                                           </Group>

@@ -419,18 +419,19 @@ public class MainWindow extends javax.swing.JFrame {
         List<Double> maquinasPipeline = obterListaDeValores(maquinasTxt, ',');
         List<Double> parametrosPipeline = obterListaDeValores(parametrosTxt, ',');
         int numExecucoes = Integer.valueOf(execucoes_jTextField.getText());
+        double perturbacao = (Double.valueOf(perturbacao_jTextField.getText()) / 100);
         
         Simulador s = new Simulador(maquinasPipeline, parametrosPipeline, numExecucoes);
         if (monotona_jRadioButton.isSelected()) {
             s.simular(new Monotona());
             log_jTextArea.setText(s.getLog());
         } else if (monotonaRandom_jRadioButton.isSelected()) {
-            s.simular(new MonotonaRandomizada());
+            s.simular(new MonotonaRandomizada(perturbacao));
             log_jTextArea.setText(s.getLog());
         } else {
             s.simular(new Monotona());
             log_jTextArea.setText(s.getLog());
-            s.simular(new MonotonaRandomizada());
+            s.simular(new MonotonaRandomizada(perturbacao));
             log_jTextArea.setText(s.getLog());
         }
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -9,10 +9,15 @@ public abstract class BuscaLocal {
 
     private ArrayList<Maquina> maquinas;
     private int numTarefas;
-
-    public void executar(boolean debug) { 
-        
-    };
+    private int iteracoes = 0; // iterações são incrementadas apenas quando a melhora no makespan
+    private int contadorIteracoesDebug = 1;
+    private String parametro;
+    
+    public void executar(boolean debug) { };
+    
+    public BuscaLocal() {
+        this.maquinas = new ArrayList<>();
+    }
 
     /**
      * Criar as máquinas para busca
@@ -74,4 +79,69 @@ public abstract class BuscaLocal {
 
         return maquinas.get(proximoIndex);
     }
+    
+    public void incrementaIteracao(){
+        this.iteracoes++;
+    }
+
+    public void debug(ArrayList<Maquina> maquinas, int numeroMovimentosSemMelhora, int numeroMovimentosSemMelhoraRandomizada) {
+        int numeroMaquina = 1;
+        
+        System.out.println("\n"+this.contadorIteracoesDebug+ "° ITERACAO");
+        
+        for (Maquina maquina : maquinas) {
+            String debugMsg = "";
+            //numero da maquina
+            debugMsg += Integer.toString(numeroMaquina) + " - ";
+            //makespan da maquina
+            debugMsg += "MS(" + maquina.getMakespan() + ")";
+            
+            int numeroTarefa = 1;
+            for(Tarefa tarefa : maquina.getTarefas() ){
+                debugMsg += " - " + "T" + Integer.toString(numeroTarefa);
+                debugMsg += "(" + Integer.toString(tarefa.getTempo()) + ")";
+                numeroTarefa++;
+            }
+            
+            System.out.println(debugMsg);            
+            numeroMaquina++;            
+        }     
+        System.out.println("movimentos sem melhora: " + numeroMovimentosSemMelhora);
+        System.out.println("movimentos sem melhora randomizada: " + numeroMovimentosSemMelhoraRandomizada);
+        this.contadorIteracoesDebug++;
+    }
+    
+    public Maquina getMaquinaAleatoria(boolean maquinaPrecisaTerTarefas){
+        ArrayList<Maquina> maquinas = this.getMaquinas();
+        Maquina maquinaAleatoria;
+        int indexMaquinaAleatoria = 0;
+        
+        do{
+            indexMaquinaAleatoria = (int) (Math.random() * maquinas.size());        
+            maquinaAleatoria = maquinas.get(indexMaquinaAleatoria);
+        }while(maquinaPrecisaTerTarefas && maquinaAleatoria.getNumeroTarefas() == 0); 
+        
+        return maquinaAleatoria;        
+    }
+        
+    public int getIteracoes(){
+        return this.iteracoes;
+    }
+    
+    public int getNumeroTarefas(){
+        return this.numTarefas;
+    }
+    
+    public int getNumeroMaquinas(){
+        return this.maquinas.size();
+    }
+    
+    public void setParametro(String parametro) {
+        this.parametro = parametro;
+    }
+    
+    public String getParametro() {
+        return parametro;
+    }
+    
 }

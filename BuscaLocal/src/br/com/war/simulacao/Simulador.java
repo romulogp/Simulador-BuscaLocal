@@ -1,6 +1,5 @@
 package br.com.war.simulacao;
 
-import br.com.war.gui.MainWindow;
 import br.com.war.heuristicas.BuscaLocal;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class Simulador {
                             tempo,
                             0,
                             heuristica.getMaquinaMaiorMakespan().getMakespan(),
-                            r));
+                            heuristica.getParametro()));
                 }
             }
         }
