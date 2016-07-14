@@ -201,6 +201,11 @@ public class MainWindow extends javax.swing.JFrame {
         perturbacao_jLabel.setText("Perturbação: (%)");
 
         perturbacao_jTextField.setText("10");
+        perturbacao_jTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                perturbacao_jTextFieldFocusLost(evt);
+            }
+        });
 
         parametros_jTextField.setText("1.5, 2.0");
         parametros_jTextField.setPreferredSize(new java.awt.Dimension(14, 25));
@@ -257,7 +262,6 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(parametros_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(perturbacao_jLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(0, 0, 0)
                                 .addGap(19, 19, 19)
                                 .addComponent(perturbacao_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tarefas_jTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,10 +327,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         saida_jTabbedPane.setFocusable(false);
 
-        log_jTextArea.setEditable(false);
         log_jTextArea.setColumns(20);
         log_jTextArea.setRows(5);
-        log_jTextArea.setFocusable(false);
         saida_jScrollPane.setViewportView(log_jTextArea);
 
         saida_jTabbedPane.addTab("Saída", saida_jScrollPane);
@@ -435,6 +437,12 @@ public class MainWindow extends javax.swing.JFrame {
             log_jTextArea.setText(s.getLog());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void perturbacao_jTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_perturbacao_jTextFieldFocusLost
+        if (Double.valueOf(perturbacao_jTextField.getText()) > 100) {
+            perturbacao_jTextField.setText("100");
+        }
+    }//GEN-LAST:event_perturbacao_jTextFieldFocusLost
 
     private void validaHeuristicaSelecionada() {
         if (monotonaRandom_jRadioButton.isSelected() || ambas_jRadioButton.isSelected()) {

@@ -12,12 +12,15 @@ public abstract class BuscaLocal {
     private int iteracoes = 0; // iterações são incrementadas apenas quando a melhora no makespan
     private int contadorIteracoesDebug = 1;
     private String parametro;
-    
-    public void executar(boolean debug) { };
+    private long tempoExecucao;
     
     public BuscaLocal() {
         this.maquinas = new ArrayList<>();
     }
+    
+    public void executar(boolean debug) {
+        
+    };
 
     /**
      * Criar as máquinas para busca
@@ -69,8 +72,6 @@ public abstract class BuscaLocal {
     }
 
     public Maquina getProximaMaquina(Maquina maquinaAtual, int numeroMovimentosSemMelhora) {
-        ArrayList<Maquina> maquinas = this.getMaquinas();
-
         int proximoIndex = maquinas.indexOf(maquinaAtual) + 1 + numeroMovimentosSemMelhora;
 
         if (proximoIndex >= maquinas.size()) {
@@ -112,9 +113,8 @@ public abstract class BuscaLocal {
     }
     
     public Maquina getMaquinaAleatoria(boolean maquinaPrecisaTerTarefas){
-        ArrayList<Maquina> maquinas = this.getMaquinas();
         Maquina maquinaAleatoria;
-        int indexMaquinaAleatoria = 0;
+        int indexMaquinaAleatoria;
         
         do{
             indexMaquinaAleatoria = (int) (Math.random() * maquinas.size());        
@@ -142,6 +142,14 @@ public abstract class BuscaLocal {
     
     public String getParametro() {
         return parametro;
+    }
+    
+    public long getTempoExecucao() {
+        return tempoExecucao;
+    }
+    
+    public void setTempoExecucao(long tempoExecucao) {
+        this.tempoExecucao = tempoExecucao;
     }
     
 }

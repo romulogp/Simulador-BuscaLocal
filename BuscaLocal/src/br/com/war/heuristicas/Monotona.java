@@ -12,6 +12,8 @@ public class Monotona extends BuscaLocal {
     
     @Override
     public void executar(boolean debug) {
+        long tempoInicial = System.currentTimeMillis();
+        
         ArrayList<Maquina> maquinas = this.getMaquinas();
         Maquina maquinaMaiorMakespan;
         Maquina proximaMaquina;
@@ -46,6 +48,8 @@ public class Monotona extends BuscaLocal {
                 //incrementa o numero de movimentos sem melhora.
                 numeroMovimentosSemMelhora++;
             }
-        }   
+        }
+        
+        setTempoExecucao(System.currentTimeMillis() - tempoInicial);
     } 
 }

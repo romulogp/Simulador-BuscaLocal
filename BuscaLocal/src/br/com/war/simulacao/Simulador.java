@@ -23,20 +23,21 @@ public class Simulador {
     
     public void simular(BuscaLocal heuristica) {
         
+        String cabecalho = "heuristica,n,m,replicacao,tempo,iteracoes,valor,parametro";
+        logBuilder.append(cabecalho).append("\n");
+        
         for (int i = 0; i < vezesExecutarInstancia; i++) {
             for (Double r : parametroPipeline) {
                 for (Double m : maquinaPipeline) {
                     heuristica.instanciarMaquinas(m.intValue(), r);
-                    long inicio = System.currentTimeMillis();
                     heuristica.executar(false);
-                    long tempo  = System.currentTimeMillis() - inicio;
                     logBuilder.append(GeradorLog.gerar(
                             heuristica,
-                            Math.round(Math.pow(m, r)),
-                            m.intValue(),
+                            heuristica.getNumeroTarefas(),
+                            heuristica.getNumeroMaquinas(),
                             (i + 1),
-                            tempo,
-                            0,
+                            heuristica.getTempoExecucao(),
+                            heuristica.getIteracoes(),
                             heuristica.getMaquinaMaiorMakespan().getMakespan(),
                             heuristica.getParametro()));
                 }
