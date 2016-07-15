@@ -46,6 +46,7 @@ public class MainWindow extends javax.swing.JFrame {
         monotona_jRadioButton = new javax.swing.JRadioButton();
         monotonaRandom_jRadioButton = new javax.swing.JRadioButton();
         ambas_jRadioButton = new javax.swing.JRadioButton();
+        comMelhoria_jCheckBox = new javax.swing.JCheckBox();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -151,16 +152,25 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        comMelhoria_jCheckBox.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        comMelhoria_jCheckBox.setSelected(true);
+        comMelhoria_jCheckBox.setText("com melhoria?");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(monotona_jRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ambas_jRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(monotonaRandom_jRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(comMelhoria_jCheckBox, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(monotona_jRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ambas_jRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(monotonaRandom_jRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(30, 30, 30))
         );
 
@@ -173,9 +183,11 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(monotona_jRadioButton)
                 .addGap(30, 30, 30)
                 .addComponent(monotonaRandom_jRadioButton)
-                .addGap(30, 30, 30)
+                .addGap(0, 0, 0)
+                .addComponent(comMelhoria_jCheckBox)
+                .addGap(15, 15, 15)
                 .addComponent(ambas_jRadioButton)
-                .addGap(40, 40, 40))
+                .addContainerGap())
         );
 
         heuristica_jTabbedPane.addTab("Heurística", jPanel2);
@@ -422,18 +434,19 @@ public class MainWindow extends javax.swing.JFrame {
         List<Double> parametrosPipeline = obterListaDeValores(parametrosTxt, ',');
         int numExecucoes = Integer.valueOf(execucoes_jTextField.getText());
         double perturbacao = (Double.valueOf(perturbacao_jTextField.getText()) / 100);
+        boolean comMelhoria = comMelhoria_jCheckBox.isSelected();
         
         Simulador s = new Simulador(maquinasPipeline, parametrosPipeline, numExecucoes);
         if (monotona_jRadioButton.isSelected()) {
             s.simular(new Monotona());
             log_jTextArea.setText(s.getLog());
         } else if (monotonaRandom_jRadioButton.isSelected()) {
-            s.simular(new MonotonaRandomizada(perturbacao));
+            s.simular(new MonotonaRandomizada(perturbacao, comMelhoria));
             log_jTextArea.setText(s.getLog());
         } else {
             s.simular(new Monotona());
             log_jTextArea.setText(s.getLog());
-            s.simular(new MonotonaRandomizada(perturbacao));
+            s.simular(new MonotonaRandomizada(perturbacao, comMelhoria));
             log_jTextArea.setText(s.getLog());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -453,11 +466,13 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void enablePerturbacao() {
+        comMelhoria_jCheckBox.setEnabled(true);
         perturbacao_jLabel.setEnabled(true);
         perturbacao_jTextField.setEnabled(true);
     }
 
     private void disablePerturbacao() {
+        comMelhoria_jCheckBox.setEnabled(false);
         perturbacao_jLabel.setEnabled(false);
         perturbacao_jTextField.setEnabled(false);
     }
@@ -484,6 +499,7 @@ public class MainWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton ambas_jRadioButton;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JCheckBox comMelhoria_jCheckBox;
     private javax.swing.JPanel conteudo_jPanel;
     private javax.swing.JTextField execucoes_jTextField;
     private javax.swing.JTabbedPane heuristica_jTabbedPane;
