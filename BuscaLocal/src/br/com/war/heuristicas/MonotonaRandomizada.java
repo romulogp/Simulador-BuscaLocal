@@ -38,7 +38,10 @@ public class MonotonaRandomizada extends BuscaLocal {
             }
 
             int chanceAleatória = (int) (Math.random() * 100) + 1;
-
+            
+            if (debug) {
+                System.out.println("chanceAleatória: "+chanceAleatória+"\nthis.frequenciaCaminhadaAleatoria: "+this.frequenciaCaminhadaAleatoria);
+            }
             //random
             if (chanceAleatória <= (this.frequenciaCaminhadaAleatoria * 100)) {
                 maquinaMaiorMakespan = this.getMaquinaMaiorMakespan();
