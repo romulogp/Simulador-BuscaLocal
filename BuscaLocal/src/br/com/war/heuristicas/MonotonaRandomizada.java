@@ -39,7 +39,7 @@ public class MonotonaRandomizada extends BuscaLocal {
 
             int chanceAleatória = (int) (Math.random() * 100) + 1;  
 
-
+            System.out.println("chanceAleatória: "+chanceAleatória+"\nthis.frequenciaCaminhadaAleatoria: "+this.frequenciaCaminhadaAleatoria);
             //random
             if(chanceAleatória <= (this.frequenciaCaminhadaAleatoria * 100)){    
                 maquinaMaiorMakespan      = this.getMaquinaMaiorMakespan();
@@ -55,6 +55,7 @@ public class MonotonaRandomizada extends BuscaLocal {
                 
                 if(this.verificarMelhora == false){
                     numeroMovimentosSemMelhora = 0; 
+                    numeroMovimentosSemMelhoraRandomizada++;
                 }
                 
                 if(this.verificarMelhora){
@@ -68,14 +69,15 @@ public class MonotonaRandomizada extends BuscaLocal {
                     }
 
                        //zera o numero de movimentos sem melhora
-                       numeroMovimentosSemMelhora = 0;                        
+                       numeroMovimentosSemMelhora = 0;  
+                       numeroMovimentosSemMelhoraRandomizada = 0;
                    //nao ocorreu melhora, mantem a tarefa na mesma maquina, na mesma posição
                    }else{
                        if(debug){
                             System.out.println("tentou realizar um movimento aleátorio da maquina " + this.getMaquinas().indexOf(maquinaAleatoria1)
                             + " para a maquina " + this.getMaquinas().indexOf(maquinaAleatoria2) + " tarefa: " + indexTarefaAleatoria); 
                         }
-
+                       numeroMovimentosSemMelhoraRandomizada++;
                        maquinaAleatoria1.adicionaTarefaToIndex(indexTarefaAleatoria, maquinaAleatoria2.removePrimeiraTarefa()); 
                    } 
                 }
@@ -98,7 +100,7 @@ public class MonotonaRandomizada extends BuscaLocal {
 
                         //zera o numero de movimentos sem melhora
                         numeroMovimentosSemMelhora = 0;                        
-                        
+                        numeroMovimentosSemMelhoraRandomizada = 0;
                         //iterompe o laço, ja achamos a primeira melhora nessa iteração
                         break;
                     //nao ocorreu melhora, mantem a tarefa na mesma maquina    
@@ -106,6 +108,7 @@ public class MonotonaRandomizada extends BuscaLocal {
                         maquinaMaiorMakespan.adicionaTarefa(tarefaAtual);
                         //incrementa o numero de movimentos sem melhora.
                         numeroMovimentosSemMelhora++;
+                        numeroMovimentosSemMelhoraRandomizada++;
                     }
                     
                     // aumenta o numero de iterações realizadas
@@ -113,7 +116,7 @@ public class MonotonaRandomizada extends BuscaLocal {
                 }
             } 
                         
-            numeroMovimentosSemMelhoraRandomizada++;
+            
         }
     }
 }
