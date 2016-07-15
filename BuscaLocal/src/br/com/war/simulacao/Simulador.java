@@ -2,6 +2,7 @@ package br.com.war.simulacao;
 
 import br.com.war.heuristicas.BuscaLocal;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 
@@ -29,6 +30,7 @@ public class Simulador {
         for (int i = 0; i < vezesExecutarInstancia; i++) {
             for (Double r : parametroPipeline) {
                 for (Double m : maquinaPipeline) {
+                    
                     heuristica.instanciarMaquinas(m.intValue(), r);
                     heuristica.executar(false);
                     logBuilder.append(GeradorLog.gerar(

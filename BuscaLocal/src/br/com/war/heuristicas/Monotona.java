@@ -3,6 +3,7 @@ package br.com.war.heuristicas;
 import br.com.war.modelo.Maquina;
 import br.com.war.modelo.Tarefa;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Monotona extends BuscaLocal {
 
@@ -12,7 +13,7 @@ public class Monotona extends BuscaLocal {
     
     @Override
     public void executar(boolean debug) {
-        long tempoInicial = System.currentTimeMillis();
+        long tempoI = System.nanoTime();
         
         ArrayList<Maquina> maquinas = this.getMaquinas();
         Maquina maquinaMaiorMakespan;
@@ -51,6 +52,7 @@ public class Monotona extends BuscaLocal {
             this.incrementaIteracao();
         }
         
-        setTempoExecucao(System.currentTimeMillis() - tempoInicial);
+        long durationInMs = TimeUnit.MILLISECONDS.convert(System.nanoTime() - tempoI, TimeUnit.NANOSECONDS);
+        setTempoExecucao(durationInMs);
     } 
 }
