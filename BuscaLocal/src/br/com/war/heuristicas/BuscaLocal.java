@@ -13,16 +13,14 @@ public abstract class BuscaLocal {
     private int iteracoes = 0; // iterações são incrementadas apenas quando a melhora no makespan
     private int contadorIteracoesDebug = 1;
     private String parametro;
-    private long tempoExecucao;
+    private long tempoExecucao = -1;
     
     public BuscaLocal() {
         this.maquinas = new ArrayList<>();
         this.instanciaInicial = new ArrayList<>();
     }
     
-    public void executar(boolean debug) {
-        
-    };
+    public abstract void executar(boolean debug);
 
     /**
      * Criar as máquinas para busca
@@ -32,10 +30,11 @@ public abstract class BuscaLocal {
      * de tarefas necessárias
      */
     public void instanciarMaquinas(int numMaquinas, double parametroTarefa) {
+        iteracoes = 0;
         instanciaInicial = new ArrayList<>();
-        this.instanciaInicial.add(new Maquina(instanciarTarefasIniciais(numMaquinas, parametroTarefa))); // ADICIONA UM PILHA DE TAREFAS NA PRIMEIRA MAQUINA
+        instanciaInicial.add(new Maquina(instanciarTarefasIniciais(numMaquinas, parametroTarefa))); // ADICIONA UM PILHA DE TAREFAS NA PRIMEIRA MAQUINA
         for (int i = 0; i < numMaquinas - 1; i++) {
-            this.instanciaInicial.add(new Maquina());
+            instanciaInicial.add(new Maquina());
         }
         restaurarInstanciaInicial();
     }
@@ -80,6 +79,10 @@ public abstract class BuscaLocal {
 
     public ArrayList<Maquina> getMaquinas() {
         return maquinas;
+    }
+    
+    public void setMaquinas(ArrayList<Maquina> maquinas) {
+        this.maquinas = maquinas;
     }
 
     public Maquina getProximaMaquina(Maquina maquinaAtual, int numeroMovimentosSemMelhora) {

@@ -74,7 +74,7 @@
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="info_jLabel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -96,7 +96,7 @@
                       <Component id="jLabel3" min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="info_jLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -111,10 +111,10 @@
             <Property name="text" type="java.lang.String" value="BUSCA LOCAL"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="info_jLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Courier New" size="18" style="2"/>
+              <Font name="Courier New" size="18" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Simula&#xe7;&#xe3;o das Heur&#xed;sticas Mon&#xf3;tona e Mon&#xf3;tona Rand&#xf4;mica"/>
           </Properties>
@@ -125,7 +125,12 @@
               <Image iconType="3" name="/br/com/war/resources/icons/information-icon-48.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="jLabel3"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel3MouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel3MouseExited"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -262,7 +267,6 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Dialog" size="12" style="0"/>
                         </Property>
-                        <Property name="selected" type="boolean" value="true"/>
                         <Property name="text" type="java.lang.String" value="com melhoria?"/>
                       </Properties>
                     </Component>
@@ -326,7 +330,7 @@
                                           <Group type="102" alignment="1" attributes="0">
                                               <Component id="execucoes_jTextField" min="-2" pref="261" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jButton1" linkSize="4" max="32767" attributes="0"/>
+                                              <Component id="simular_jButton" linkSize="4" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -370,7 +374,7 @@
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jButton1" linkSize="2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                                      <Component id="simular_jButton" linkSize="2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                       <Component id="execucoes_jTextField" linkSize="2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
@@ -402,6 +406,9 @@
                           <Color id="Cursor Padr&#xe3;o"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="maquinas_jTextFieldFocusLost"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel5">
                       <Properties>
@@ -434,6 +441,9 @@
                           <Dimension value="[14, 25]"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="parametros_jTextFieldFocusLost"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel7">
                       <Properties>
@@ -445,7 +455,7 @@
                     </Component>
                     <Component class="javax.swing.JTextField" name="tarefas_jTextField">
                       <Properties>
-                        <Property name="enabled" type="boolean" value="false"/>
+                        <Property name="editable" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[14, 25]"/>
                         </Property>
@@ -467,7 +477,7 @@
                         <Property name="text" type="java.lang.String" value="Default: 1.5, 2.0"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton1">
+                    <Component class="javax.swing.JButton" name="simular_jButton">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/br/com/war/resources/icons/run-icon-24.png"/>
@@ -475,7 +485,7 @@
                         <Property name="text" type="java.lang.String" value="Simular"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="simular_jButtonActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel6">

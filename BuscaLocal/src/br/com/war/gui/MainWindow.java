@@ -3,6 +3,7 @@ package br.com.war.gui;
 import br.com.war.heuristicas.Monotona;
 import br.com.war.heuristicas.MonotonaRandomizada;
 import br.com.war.simulacao.Simulador;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.util.List;
 import java.util.ArrayList;
@@ -23,6 +24,11 @@ public class MainWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         validaHeuristicaSelecionada();
+        try { 
+            gerarTextoTarefas();
+        } catch (Exception e) {
+            System.exit(-1);
+        }
     }
 
     /**
@@ -37,7 +43,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         topo_jPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        info_jLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         conteudo_jPanel = new javax.swing.JPanel();
         jSplitPane2 = new javax.swing.JSplitPane();
@@ -59,7 +65,7 @@ public class MainWindow extends javax.swing.JFrame {
         tarefas_jTextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        simular_jButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         execucoes_jTextField = new javax.swing.JTextField();
@@ -77,11 +83,20 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Gadugi", 1, 40)); // NOI18N
         jLabel2.setText("BUSCA LOCAL");
 
-        jLabel1.setFont(new java.awt.Font("Courier New", 2, 18)); // NOI18N
-        jLabel1.setText("Simulação das Heurísticas Monótona e Monótona Randômica");
+        info_jLabel.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
+        info_jLabel.setText("Simulação das Heurísticas Monótona e Monótona Randômica");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/war/resources/icons/information-icon-48.png"))); // NOI18N
         jLabel3.setText("jLabel3");
+        jLabel3.setToolTipText("");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel3MouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout topo_jPanelLayout = new javax.swing.GroupLayout(topo_jPanel);
         topo_jPanel.setLayout(topo_jPanelLayout);
@@ -91,7 +106,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(topo_jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(topo_jPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(info_jLabel)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(topo_jPanelLayout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -107,7 +122,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(info_jLabel)
                 .addGap(20, 20, 20))
         );
 
@@ -153,7 +168,6 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         comMelhoria_jCheckBox.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        comMelhoria_jCheckBox.setSelected(true);
         comMelhoria_jCheckBox.setText("com melhoria?");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -205,6 +219,11 @@ public class MainWindow extends javax.swing.JFrame {
         maquinas_jTextField.setText("10,20,30");
         maquinas_jTextField.setToolTipText("");
         maquinas_jTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        maquinas_jTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                maquinas_jTextFieldFocusLost(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setText("Expoente 'r':");
@@ -221,11 +240,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         parametros_jTextField.setText("1.5, 2.0");
         parametros_jTextField.setPreferredSize(new java.awt.Dimension(14, 25));
+        parametros_jTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                parametros_jTextFieldFocusLost(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel7.setText("Tarefas:");
 
-        tarefas_jTextField.setEnabled(false);
+        tarefas_jTextField.setEditable(false);
         tarefas_jTextField.setPreferredSize(new java.awt.Dimension(14, 25));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
@@ -234,11 +258,11 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jLabel11.setText("Default: 1.5, 2.0");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/war/resources/icons/run-icon-24.png"))); // NOI18N
-        jButton1.setText("Simular");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        simular_jButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/war/resources/icons/run-icon-24.png"))); // NOI18N
+        simular_jButton.setText("Simular");
+        simular_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                simular_jButtonActionPerformed(evt);
             }
         });
 
@@ -280,7 +304,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(execucoes_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(simular_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(148, 148, 148)
                         .addComponent(jLabel8))
@@ -292,7 +316,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel5, perturbacao_jLabel});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, perturbacao_jTextField});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {perturbacao_jTextField, simular_jButton});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,7 +342,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(simular_jButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(execucoes_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -327,7 +351,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {execucoes_jTextField, jButton1, jLabel4, jLabel5, jLabel7, maquinas_jTextField, parametros_jTextField, perturbacao_jLabel, perturbacao_jTextField, tarefas_jTextField});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {execucoes_jTextField, jLabel4, jLabel5, jLabel7, maquinas_jTextField, parametros_jTextField, perturbacao_jLabel, perturbacao_jTextField, simular_jButton, tarefas_jTextField});
 
         execucoes_jTextField.getAccessibleContext().setAccessibleName("");
 
@@ -372,7 +396,7 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String transformarListaValoresEmTexto(List<Long> lista) {
+    private String transformarListaValoresEmTexto(List<Long> lista) throws NumberFormatException {
         String texto = "";
         for (int i = 0; i < lista.size() - 1; i++) {
             texto += lista.get(i).toString() + ',';
@@ -424,29 +448,40 @@ public class MainWindow extends javax.swing.JFrame {
     private void ambas_jRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ambas_jRadioButtonActionPerformed
         validaHeuristicaSelecionada();
     }//GEN-LAST:event_ambas_jRadioButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    private void gerarTextoTarefas() throws Exception {
         String maquinasTxt = maquinas_jTextField.getText();
         String parametrosTxt = parametros_jTextField.getText();
         tarefas_jTextField.setText(transformarListaValoresEmTexto(gerarNumeroTarefas(maquinasTxt, parametrosTxt)));
-        
-        List<Double> maquinasPipeline = obterListaDeValores(maquinasTxt, ',');
-        List<Double> parametrosPipeline = obterListaDeValores(parametrosTxt, ',');
-        int numExecucoes = Integer.valueOf(execucoes_jTextField.getText());
-        double perturbacao = (Double.valueOf(perturbacao_jTextField.getText()) / 100);
-        boolean comMelhoria = comMelhoria_jCheckBox.isSelected();
-        
-        Simulador s = new Simulador(maquinasPipeline, parametrosPipeline, numExecucoes);
-        if (monotona_jRadioButton.isSelected()) {
-            s.simular(new Monotona());
-        } else if (monotonaRandom_jRadioButton.isSelected()) {
-            s.simular(new MonotonaRandomizada(perturbacao, comMelhoria));
-        } else {
-            s.simular(new Monotona());
-            s.simular(new MonotonaRandomizada(perturbacao, comMelhoria));
+    }
+    
+    private void simular_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simular_jButtonActionPerformed
+        try {
+            String maquinasTxt = maquinas_jTextField.getText();
+            String parametrosTxt = parametros_jTextField.getText();
+            tarefas_jTextField.setText(transformarListaValoresEmTexto(gerarNumeroTarefas(maquinasTxt, parametrosTxt)));
+
+            List<Double> maquinasPipeline = obterListaDeValores(maquinasTxt, ',');
+            List<Double> parametrosPipeline = obterListaDeValores(parametrosTxt, ',');
+            int numExecucoes = Integer.valueOf(execucoes_jTextField.getText());
+            double perturbacao = (Double.valueOf(perturbacao_jTextField.getText()) / 100);
+            boolean comMelhoria = comMelhoria_jCheckBox.isSelected();
+            
+            Simulador s = new Simulador(maquinasPipeline, parametrosPipeline, numExecucoes);
+            if (monotona_jRadioButton.isSelected()) {
+                s.simular(new Monotona());
+            } else if (monotonaRandom_jRadioButton.isSelected()) {
+                s.simular(new MonotonaRandomizada(perturbacao, comMelhoria));
+            } else {
+                s.simular(new Monotona());
+                s.simular(new MonotonaRandomizada(perturbacao, comMelhoria));
+            }
+            log_jTextArea.setText(s.getLog());
+            
+        } catch (Exception e) {
+            log_jTextArea.setText("Parâmetros Inválidos");
         }
-        log_jTextArea.setText(s.getLog());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_simular_jButtonActionPerformed
 
     private void perturbacao_jTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_perturbacao_jTextFieldFocusLost
         if (Double.valueOf(perturbacao_jTextField.getText()) > 100) {
@@ -454,6 +489,33 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_perturbacao_jTextFieldFocusLost
 
+    private void maquinas_jTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_maquinas_jTextFieldFocusLost
+        try {
+            gerarTextoTarefas();
+        } catch (Exception e) {
+            log_jTextArea.setText("Parâmetros de máquinas inválido.");
+        }
+    }//GEN-LAST:event_maquinas_jTextFieldFocusLost
+
+    private void jLabel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseEntered
+        info_jLabel.setBackground(Color.RED);
+        info_jLabel.setText("\\o/ Acadêmicos:  Ayrton,  Rômulo,  William");
+        
+    }//GEN-LAST:event_jLabel3MouseEntered
+
+    private void jLabel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseExited
+        info_jLabel.setBackground(Color.BLACK);
+        info_jLabel.setText("Simulação das Heurísticas Monótona e Monótona Randômica");
+    }//GEN-LAST:event_jLabel3MouseExited
+
+    private void parametros_jTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_parametros_jTextFieldFocusLost
+        try {
+            gerarTextoTarefas();
+        } catch (Exception e) {
+            log_jTextArea.setText("Parâmetro expoente 'r' inválido.");
+        }
+    }//GEN-LAST:event_parametros_jTextFieldFocusLost
+    
     private void validaHeuristicaSelecionada() {
         if (monotonaRandom_jRadioButton.isSelected() || ambas_jRadioButton.isSelected()) {
             enablePerturbacao();
@@ -500,8 +562,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel conteudo_jPanel;
     private javax.swing.JTextField execucoes_jTextField;
     private javax.swing.JTabbedPane heuristica_jTabbedPane;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel info_jLabel;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -524,6 +585,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField perturbacao_jTextField;
     private javax.swing.JScrollPane saida_jScrollPane;
     private javax.swing.JTabbedPane saida_jTabbedPane;
+    private javax.swing.JButton simular_jButton;
     private javax.swing.JTextField tarefas_jTextField;
     private javax.swing.JPanel topo_jPanel;
     // End of variables declaration//GEN-END:variables
