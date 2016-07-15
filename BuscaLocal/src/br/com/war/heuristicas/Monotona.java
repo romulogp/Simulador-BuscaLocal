@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class Monotona extends BuscaLocal {
 
     public Monotona() {
+        super();
         setParametro("NA");
     }
     

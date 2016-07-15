@@ -3,9 +3,9 @@ package br.com.war.modelo;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
-public class Maquina {
+public class Maquina implements Cloneable {
 
-    private final Stack<Tarefa> tarefas;
+    private Stack<Tarefa> tarefas;
     private int makespan;
 
     /**
@@ -25,6 +25,18 @@ public class Maquina {
         calculaMakespan();
     }
 
+    @Override
+    @SuppressWarnings("CloneDeclaresCloneNotSupported")
+    public Maquina clone() {
+        try {
+            Maquina m = (Maquina) super.clone();
+            m.tarefas = (Stack) tarefas.clone();
+            return m;
+        } catch (CloneNotSupportedException cnse) {
+            return null;
+        }
+    }
+    
     /**
      * Realiza o cálculo do makespan atual da máquina.
      * Utilizado quando a máquina é instanciada com N tarefas

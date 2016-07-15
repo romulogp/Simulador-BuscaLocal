@@ -2,7 +2,6 @@ package br.com.war.simulacao;
 
 import br.com.war.heuristicas.BuscaLocal;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 
@@ -27,10 +26,10 @@ public class Simulador {
         String cabecalho = "heuristica,n,m,replicacao,tempo,iteracoes,valor,parametro";
         logBuilder.append(cabecalho).append("\n");
         
-        for (int i = 0; i < vezesExecutarInstancia; i++) {
-            for (Double r : parametroPipeline) {
-                for (Double m : maquinaPipeline) {
-                    
+        
+        for (Double r : parametroPipeline) {
+            for (Double m : maquinaPipeline) {
+                for (int i = 0; i < vezesExecutarInstancia; i++) {
                     heuristica.instanciarMaquinas(m.intValue(), r);
                     heuristica.executar(false);
                     logBuilder.append(GeradorLog.gerar(
@@ -42,37 +41,12 @@ public class Simulador {
                             heuristica.getIteracoes(),
                             heuristica.getMaquinaMaiorMakespan().getMakespan(),
                             heuristica.getParametro()));
-                }
+
+                    heuristica.restaurarInstanciaInicial();
+                }   
             }
         }
     }
-    
-//     public void simular(BuscaLocal heuristica) {
-//        
-//        String cabecalho = "heuristica,n,m,replicacao,tempo,iteracoes,valor,parametro";
-//        logBuilder.append(cabecalho).append("\n");
-//        
-//        for (Double r : parametroPipeline) {
-//            for (Double m : maquinaPipeline) {
-//                heuristica.instanciarMaquinas(m.intValue(), r);
-//                for (int i = 0; i < vezesExecutarInstancia; i++) {
-//                    heuristica.executar(false);
-//
-//                    logBuilder.append(GeradorLog.gerar(
-//                            heuristica.getClass().getSimpleName(),
-//                            heuristica.getNumeroTarefas(),
-//                            heuristica.getNumeroMaquinas(),
-//                            (i + 1),
-//                            heuristica.getTempoExecucao(),
-//                            heuristica.getIteracoes(),
-//                            heuristica.getMaquinaMaiorMakespan().getMakespan(),
-//                            heuristica.getParametro()));
-//                    
-//                    heuristica.reiniciarInstancia();
-//                }
-//            }
-//        }
-//    }
     
     public String getLog() {
         return logBuilder.toString();

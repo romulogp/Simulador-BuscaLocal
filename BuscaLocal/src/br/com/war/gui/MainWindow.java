@@ -439,16 +439,13 @@ public class MainWindow extends javax.swing.JFrame {
         Simulador s = new Simulador(maquinasPipeline, parametrosPipeline, numExecucoes);
         if (monotona_jRadioButton.isSelected()) {
             s.simular(new Monotona());
-            log_jTextArea.setText(s.getLog());
         } else if (monotonaRandom_jRadioButton.isSelected()) {
             s.simular(new MonotonaRandomizada(perturbacao, comMelhoria));
-            log_jTextArea.setText(s.getLog());
         } else {
             s.simular(new Monotona());
-            log_jTextArea.setText(s.getLog());
             s.simular(new MonotonaRandomizada(perturbacao, comMelhoria));
-            log_jTextArea.setText(s.getLog());
         }
+        log_jTextArea.setText(s.getLog());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void perturbacao_jTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_perturbacao_jTextFieldFocusLost

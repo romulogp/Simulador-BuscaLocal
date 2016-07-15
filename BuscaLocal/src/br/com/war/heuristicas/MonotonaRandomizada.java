@@ -3,6 +3,7 @@ package br.com.war.heuristicas;
 import br.com.war.modelo.Maquina;
 import br.com.war.modelo.Tarefa;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class MonotonaRandomizada extends BuscaLocal {
 
@@ -18,6 +19,8 @@ public class MonotonaRandomizada extends BuscaLocal {
     
     @Override
     public void executar(boolean debug) {
+        long tempoI = System.nanoTime();
+        
         ArrayList<Maquina> maquinas = this.getMaquinas();
         Maquina maquinaMaiorMakespan;
         Maquina maquinaAleatoria1;
@@ -39,7 +42,7 @@ public class MonotonaRandomizada extends BuscaLocal {
 
             int chanceAleatória = (int) (Math.random() * 100) + 1;  
 
-            System.out.println("chanceAleatória: "+chanceAleatória+"\nthis.frequenciaCaminhadaAleatoria: "+this.frequenciaCaminhadaAleatoria);
+//            System.out.println("chanceAleatória: "+chanceAleatória+"\nthis.frequenciaCaminhadaAleatoria: "+this.frequenciaCaminhadaAleatoria);
             //random
             if(chanceAleatória <= (this.frequenciaCaminhadaAleatoria * 100)){    
                 maquinaMaiorMakespan      = this.getMaquinaMaiorMakespan();
@@ -114,9 +117,9 @@ public class MonotonaRandomizada extends BuscaLocal {
                     // aumenta o numero de iterações realizadas
                     this.incrementaIteracao();
                 }
-            } 
-                        
-            
+            }  
         }
+        long durationInMs = TimeUnit.MILLISECONDS.convert(System.nanoTime() - tempoI, TimeUnit.NANOSECONDS);
+        setTempoExecucao(durationInMs);
     }
 }

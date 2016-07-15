@@ -7,6 +7,7 @@ import java.util.Stack;
 
 public abstract class BuscaLocal {
 
+    private ArrayList<Maquina> instanciaInicial;
     private ArrayList<Maquina> maquinas;
     private int numTarefas;
     private int iteracoes = 0; // iterações são incrementadas apenas quando a melhora no makespan
@@ -16,6 +17,7 @@ public abstract class BuscaLocal {
     
     public BuscaLocal() {
         this.maquinas = new ArrayList<>();
+        this.instanciaInicial = new ArrayList<>();
     }
     
     public void executar(boolean debug) {
@@ -30,13 +32,22 @@ public abstract class BuscaLocal {
      * de tarefas necessárias
      */
     public void instanciarMaquinas(int numMaquinas, double parametroTarefa) {
-        maquinas = new ArrayList<>();
-        this.maquinas.add(new Maquina(instanciarTarefasIniciais(numMaquinas, parametroTarefa))); // ADICIONA UM PILHA DE TAREFAS NA PRIMEIRA MAQUINA
+        instanciaInicial = new ArrayList<>();
+        this.instanciaInicial.add(new Maquina(instanciarTarefasIniciais(numMaquinas, parametroTarefa))); // ADICIONA UM PILHA DE TAREFAS NA PRIMEIRA MAQUINA
         for (int i = 0; i < numMaquinas - 1; i++) {
-            this.maquinas.add(new Maquina());
+            this.instanciaInicial.add(new Maquina());
         }
+        restaurarInstanciaInicial();
     }
 
+    public void restaurarInstanciaInicial() {
+        maquinas = new ArrayList<>();
+        for (Maquina m : instanciaInicial) {
+            Maquina novaMaquina = (Maquina) m.clone();
+            maquinas.add(novaMaquina);
+        }
+    }
+    
     /**
      * Criar a primeira carga de tarefas
      *
@@ -68,7 +79,7 @@ public abstract class BuscaLocal {
     }
 
     public ArrayList<Maquina> getMaquinas() {
-        return this.maquinas;
+        return maquinas;
     }
 
     public Maquina getProximaMaquina(Maquina maquinaAtual, int numeroMovimentosSemMelhora) {
