@@ -13,7 +13,7 @@ public abstract class BuscaLocal {
     private int iteracoes = 0; // iterações são incrementadas apenas quando a melhora no makespan
     private int contadorIteracoesDebug = 1;
     private String parametro;
-    private long tempoExecucao = -1;
+    private double tempoExecucao = -1;
     
     public BuscaLocal() {
         this.maquinas = new ArrayList<>();
@@ -158,11 +158,11 @@ public abstract class BuscaLocal {
         return parametro;
     }
     
-    public long getTempoExecucao() {
+    public double getTempoExecucao() {
         return tempoExecucao;
     }
     
-    public void setTempoExecucao(long tempoExecucao) {
+    public void setTempoExecucao(double tempoExecucao) {
         this.tempoExecucao = tempoExecucao;
     }
     

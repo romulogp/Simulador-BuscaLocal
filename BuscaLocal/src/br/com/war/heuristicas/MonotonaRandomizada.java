@@ -19,7 +19,7 @@ public class MonotonaRandomizada extends BuscaLocal {
 
     @Override
     public void executar(boolean debug) {
-        long tempoI = System.nanoTime();
+        long lStartTime = System.nanoTime();
 
         ArrayList<Maquina> maquinas = this.getMaquinas();
         Maquina maquinaMaiorMakespan;
@@ -116,7 +116,10 @@ public class MonotonaRandomizada extends BuscaLocal {
             numeroMovimentosSemMelhoraRandomizada++;
         }
 
-        long durationInMs = TimeUnit.MILLISECONDS.convert(System.nanoTime() - tempoI, TimeUnit.NANOSECONDS);
-        setTempoExecucao(durationInMs);
+        long lEndTime = System.nanoTime();
+        long difference = (lEndTime - lStartTime); 
+        double differenceMillis = difference / 1000000.0;       
+    
+        setTempoExecucao(differenceMillis);
     }
 }

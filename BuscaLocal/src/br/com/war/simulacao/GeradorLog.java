@@ -8,7 +8,7 @@ import br.com.war.heuristicas.BuscaLocal;
  */
 public class GeradorLog {
 
-    public static String gerar(BuscaLocal heuristica, long n, int m, int replicacao, long tempo, int iteracoes, int valor, String parametro) {
+    public static String gerar(BuscaLocal heuristica, long n, int m, int replicacao, double tempo, int iteracoes, int valor, String parametro) {
         StringBuilder logFeed = new StringBuilder();
         logFeed.append(heuristica.getClass().getSimpleName()).append(",")
                 .append(n).append(",")
