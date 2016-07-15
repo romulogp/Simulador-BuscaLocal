@@ -81,10 +81,6 @@ public class MonotonaRandomizada extends BuscaLocal {
                         maquinaAleatoria1.adicionaTarefaToIndex(indexTarefaAleatoria, maquinaAleatoria2.removePrimeiraTarefa());
                     }
                 }
-
-                // aumenta o numero de iterações realizadas
-                this.incrementaIteracao();
-
                 //primeira melhora    
             } else {
                 //para se tentar mover uma terefa para as outras maquinas e não ocorrer melhora
@@ -112,9 +108,11 @@ public class MonotonaRandomizada extends BuscaLocal {
 
                     // aumenta o numero de iterações realizadas
                     this.incrementaIteracao();
-                }
+                }                
             }
 
+            // aumenta o numero de iterações realizadas
+            this.incrementaIteracao();
             numeroMovimentosSemMelhoraRandomizada++;
         }
 
